@@ -1,0 +1,85 @@
+<!--
+ * @Descripttion: 
+ * @Version: 
+ * @Author: shushu
+ * @Date: 2023-02-15 21:02:48
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-02-15 21:04:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        table{
+            width: 750px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .pagination{
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" cellspacing="0">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>班级</th>
+                <th>成绩</th>
+            </tr>
+            <tbody>
+
+            </tbody>
+        </thead>
+    </table>
+    <div class="pagination" id="box"></div>
+    <script src="./data.js"></script>
+    <script src="./index.js"></script>
+    <!-- 
+        1   0-9    10
+        2   10-19  10
+        3   20-29  10
+        4   30-39  10
+        5   40-49  10 
+
+
+     -->
+
+    <script>
+        const body = document.querySelector('tbody');
+        // change(num) 实时接收当前页码
+        const box = new Pagenation('#box',{current:2,total:1000,pagesize:15,change(num){
+            // 从大数据中加载当前页码对应的数据
+            var bindlist = datas.slice((num-1)*15,num*15);
+            // 渲染到页面中
+            body.innerHTML = bindlist.reduce((prev,item)=>{
+            return prev+`
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.age}</td>
+                    <td>${item.gender}</td>
+                    <td>${item.classroom}</td>
+                    <td>${item.score}</td>
+                </tr>
+            
+            `;
+        },'')
+        }});
+        
+        
+    </script>
+</body>
+</html>
